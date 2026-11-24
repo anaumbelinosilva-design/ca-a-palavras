@@ -1,48 +1,74 @@
-<!doctype html>
-<html lang="pt-BR" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>Modelo de Jogo — Jogos VR</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="app">
-      <header class="top">
-        <div>
-          <span class="kicker">Modelo</span>
-          <h1 id="title">Clique no Alvo</h1>
-          <p class="subtitle">Troque este jogo pelo seu. O contrato já está pronto.</p>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caccia alle Parole</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container" id="app">
+    <!-- Cabeçalho do jogo com nível, rodada, vidas e pontos -->
+    <header class="cabecalho">
+      <div class="titulo-area">
+        <h1>Caccia alle Parole</h1>
+        <span id="etiqueta-tema" class="etiqueta">Tema: Cibo</span>
+      </div>
+
+      <div class="status-barra" aria-live="polite">
+        <div class="status-item">
+          <span class="rotulo">Livello</span>
+          <strong id="valor-nivel">Facile</strong>
         </div>
-        <button id="restart" class="btn" type="button">Reiniciar</button>
-      </header>
-
-      <main>
-        <div class="hud">
-          <span class="pill">Alvos: <strong id="score">0</strong>/<span id="total">10</span></span>
-          <span class="pill">Tempo: <strong id="timer">0,0s</strong></span>
+        <div class="status-item">
+          <span class="rotulo">Round</span>
+          <strong id="valor-rodada">1 / 6</strong>
         </div>
-
-        <div id="board" class="board" aria-label="Área do jogo">
-          <p id="start-hint" class="start-hint">Clique no alvo para começar</p>
+        <div class="status-item">
+          <span class="rotulo">Vite</span>
+          <strong id="valor-vidas" aria-label="5 vite">❤️❤️❤️❤️❤️</strong>
         </div>
-      </main>
+        <div class="status-item">
+          <span class="rotulo">Punti</span>
+          <strong id="valor-pontos">0</strong>
+        </div>
+      </div>
+    </header>
 
-      <footer class="bottom">
-        <p>Este é o arquivo <code>game.js</code>. Leia os comentários e adapte.</p>
-      </footer>
-    </div>
+    <!-- Mensagem rápida de acerto, erro ou instrução em italiano -->
+    <section id="caixa-feedback" class="feedback neutro" aria-live="assertive">
+      Trascina sulle lettere o clicca sulla prima e sull'ultima lettera!
+    </section>
 
-    <div id="result" class="overlay" hidden>
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="result-title">
-        <div class="modal-icon" aria-hidden="true">🎯</div>
-        <h2 id="result-title">Muito bem!</h2>
-        <p id="result-text">Você concluiu o jogo.</p>
-        <button id="play-again" class="btn btn-primary full" type="button">Jogar de novo</button>
+    <!-- Área principal: quadro de letras + lista de dicas em italiano -->
+    <section class="area-jogo">
+      <div class="quadro-wrapper">
+        <div id="grade-letras" class="grade-letras" role="grid" aria-label="Griglia delle lettere"></div>
+        <div class="acoes-selecao">
+          <button type="button" id="btn-limpar" class="btn-secundario">Annulla selezione</button>
+        </div>
+      </div>
+
+      <aside class="painel-dicas">
+        <h2>Indizi da trovare</h2>
+        <ul id="lista-dicas" class="lista-dicas"></ul>
+      </aside>
+    </section>
+
+    <!-- Tela sobreposta de fim de rodada ou fim de jogo -->
+    <div id="tela-final" class="overlay escondido" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+      <div class="modal-card">
+        <h2 id="titulo-modal">Ottimo lavoro!</h2>
+        <p id="texto-modal">Hai completato la sfida.</p>
+        <div class="resumo-final">
+          <p>Punteggio finale: <strong id="pontos-finais">0</strong></p>
+          <p>Tempo totale: <strong id="tempo-final">0s</strong></p>
+        </div>
+        <button type="button" id="btn-reiniciar" class="btn-primario">Gioca ancora</button>
       </div>
     </div>
+  </main>
 
-    <script src="game.js"></script>
-  </body>
+  <script src="game.js"></script>
+</body>
 </html>
